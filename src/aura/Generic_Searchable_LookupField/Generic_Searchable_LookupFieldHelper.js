@@ -23,7 +23,7 @@
         var itemCheck = false;
         currentVal = component.get("v.fieldSelectedVal").toUpperCase();
         //filter = currentVal.toUpperCase();
-        ul = document.getElementById("dmsActsUL");
+        ul = document.getElementById("recsUL");
         li = ul.getElementsByTagName('li');
         // Loop through all list items, and hide those who don't match the search query
         for (var i = 0; i < li.length; i++) {
@@ -36,7 +36,7 @@
             }
         }
         if(itemCheck === true && currentVal !== ''){
-            $A.util.removeClass(component.find('dmslistdiv'), 'slds-hide');
+            $A.util.removeClass(component.find('recslistdiv'), 'slds-hide');
         }
     }
 })

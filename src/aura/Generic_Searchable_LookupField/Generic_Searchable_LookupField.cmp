@@ -1,4 +1,4 @@
-<aura:component implements="force:appHostable">
+<aura:component implements="force:appHostable" controller="Generic_Searchable_LookupField_Ctlr">
     
     <!-- Attributes -->
     <aura:attribute name="fieldlabel" type="String" default="Id" description="Label Name for the field" required="true"/> 
@@ -7,10 +7,12 @@
     <aura:attribute name="isRequired" type="Boolean" default="false" description="Is field required to fill"/> 
     <aura:attribute name="queryFields" type="String" description="comma separated query fields"/> 
     <aura:attribute name="wherecondition" type="String" description="Where filter condition to be used on soql"/> 
+    <!-- Attibutes that are set by the controller code -->
     <aura:attribute name="retrievedRecords" type="sObject[]" description="To store the returned records"/> 
+    <aura:attribute name="fieldSelectedVal" type="String" description="to store the selected value from the list"/> 
     <!-- Attributes -->
     <!-- Aura Handlers -->
-    
+    <aura:handler name="init" value="{!this}"  action="{!c.doInit}" />    
     <!-- Aura Handlers -->
     
     <div class="slds-input-has-icon--right slds-p-right_x-small">
@@ -38,14 +40,14 @@
             </div>
         </div>
         <div class="slds-p-horizontal_large slds-hide slds-scrollable_y slds-border_bottom slds-border_top slds-border_left slds-border_right" 
-             aura:id="dmslistdiv" id="dmsListTable" 
+             aura:id="recslistdiv" id="dmsListTable" 
              style="height: 6rem;">
-            <ul class="slds-has-dividers_bottom slds-has-block-links" id="dmsActsUL">
-                <aura:iteration items="{!v.retrievedRecords}" var="dms">
+            <ul class="slds-has-dividers_bottom slds-has-block-links" id="recsUL">
+                <aura:iteration items="{!v.retrievedRecords}" var="rec">
                     <li class="slds-item slds-align_absolute-center">
                         <div class="slds-truncate">
-                            <a href="javascript:void(0);" id="{!dms.Id}" 
-                               onclick="{!c.selectThisDMS}">{!dms.Id}</a>
+                            <a href="javascript:void(0);" id="{!rec.Id}" 
+                               onclick="{!c.selectThisRecord}">{!rec.Id}</a>
                         </div>
                     </li>
                 </aura:iteration>

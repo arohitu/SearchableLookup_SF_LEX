@@ -1,6 +1,7 @@
 <aura:application extends="force:slds" >
-    <c:Generic_Searchable_LookupField fieldlabel="My Field Label"
+    <c:Generic_Searchable_LookupField fieldlabel="Account Name"
                                       fieldObject="Account"
                                       isRequired="true"
-                                      lookupfieldAPI="Id"/>
+                                      lookupfieldAPI="Name"
+                                      queryFields="Id,Name,Type"/>
 </aura:application>

@@ -3,26 +3,22 @@
         helper.retrieveRecords(component, event, helper);
     },
     showAllResults : function(component, event, helper) {
-        var cmpTarget = component.find('dmslistdiv');
+        var cmpTarget = component.find('recslistdiv');
         $A.util.toggleClass(cmpTarget, 'slds-hide');
     },
     handleSearchKeyUp : function(component, event, helper) {
         helper.startSearchDisplay(component, event, helper);
     },
-    selectThisDMS : function(component, event, helper) {
+    selectThisRecord : function(component, event, helper) {
         var clickedActivity = event.target.id;
-        component.set("v.dmsActivityVal", clickedActivity);
-        var cmpTarget = component.find('dmslistdiv');
+        component.set("v.fieldSelectedVal", clickedActivity);
+        var cmpTarget = component.find('recslistdiv');
         $A.util.addClass(cmpTarget, 'slds-hide');
-        //event intitale
-        var DMSEvent = component.getEvent("DMSActivity");
-        DMSEvent.setParams({"ActivityName" : component.get("v.dmsActivityVal")});
-        DMSEvent.fire();
     },
     checkForNull : function(component,event,helper){
-        var dmsActivity = component.get("v.dmsActivityVal");
+        var selValue = component.get("v.fieldSelectedVal");
         var errfield = component.find("search-input-error");
-        if(dmsActivity === '')	{
+        if(selValue === '')	{
             errfield.set("v.errors",[{message:"Selezionare un'attività DMS."}]);
             //Do not confirm on parent component if DMS Activity is null
             return false;

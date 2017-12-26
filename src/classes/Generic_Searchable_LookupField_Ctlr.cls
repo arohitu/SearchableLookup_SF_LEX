@@ -2,10 +2,14 @@ public class Generic_Searchable_LookupField_Ctlr {
 
     // Method that provides the Activity record created during the process for the use within the component. Query:1,DML:0
     @AuraEnabled
-    public static List<sObject> retrieveActivityByAccId (String qfields,
-                                                         String qObject,
-                                                         String qWhereCond,
-                                                         String lookupField) {
+    public static List<sObject> retrieveRecords (String qfields,
+                                                 String qObject,
+                                                 String qWhereCond,
+                                                 String lookupField) {
+        System.debug('---caleed calasss--- 111 >: '+qfields);
+        System.debug('---caleed calasss--- 222 >: '+qObject);
+        System.debug('---caleed calasss--- 333 >: '+qWhereCond);
+        System.debug('---caleed calasss--- 444 >: '+lookupField);
         List<sObject> sobjectRecords = new List<sObject>();
         String soqlQuery = 'SELECT ';
         if (String.isNotBlank(qfields))  {
@@ -17,7 +21,7 @@ public class Generic_Searchable_LookupField_Ctlr {
             }
         } 
         else {
-            soqlQuery = lookupField;
+            soqlQuery = soqlQuery+lookupField;
         }
         soqlQuery = soqlQuery+' FROM '+qObject;
         if (String.isNotBlank(qWhereCond))  {
