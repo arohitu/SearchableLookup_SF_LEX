@@ -40,7 +40,7 @@
             </div>
         </div>
         <div class="slds-p-horizontal_large slds-hide slds-scrollable_y slds-border_bottom slds-border_top slds-border_left slds-border_right" 
-             aura:id="recslistdiv" id="dmsListTable" 
+             aura:id="recslistdiv" id="recsListTable" 
              style="height: 6rem;">
             <ul class="slds-has-dividers_bottom slds-has-block-links" id="recsUL">
                 <aura:iteration items="{!v.retrievedRecords}" var="rec">
