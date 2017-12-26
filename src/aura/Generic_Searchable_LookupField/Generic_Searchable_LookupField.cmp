@@ -1,0 +1,55 @@
+<aura:component implements="force:appHostable">
+    
+    <!-- Attributes -->
+    <aura:attribute name="fieldlabel" type="String" default="Id" description="Label Name for the field" required="true"/> 
+    <aura:attribute name="lookupfieldAPI" type="String" default="Id" description="API Name for the field to be displayed for lookup" required="true"/> 
+    <aura:attribute name="fieldObject" type="String" default="Account" description="Object on which the field is present" required="true"/> 
+    <aura:attribute name="isRequired" type="Boolean" default="false" description="Is field required to fill"/> 
+    <aura:attribute name="queryFields" type="String" description="comma separated query fields"/> 
+    <aura:attribute name="wherecondition" type="String" description="Where filter condition to be used on soql"/> 
+    <aura:attribute name="retrievedRecords" type="sObject[]" description="To store the returned records"/> 
+    <!-- Attributes -->
+    <!-- Aura Handlers -->
+    
+    <!-- Aura Handlers -->
+    
+    <div class="slds-input-has-icon--right slds-p-right_x-small">
+        <div class="slds-form-element">
+            <label class="slds-form-element__label" for="text-input-01">
+                <aura:if isTrue="{!v.isRequired}">
+                	<abbr aura:id="requiredField" class="'slds-required" title="required">*</abbr>  
+                </aura:if>
+                {!v.fieldlabel}
+            </label>
+        </div>                            
+        <div class="slds-form-element__control" 
+             xmlns="http://www.w3.org/2000/svg" 
+             xmlns:xlink="http://www.w3.org/1999/xlink">
+            <div >
+                <div class="slds-input-has-icon">
+                    <lightning:buttonicon iconName="utility:search" 
+                                          class="slds-input__icon"
+                                          size="small" alternativeText="" 
+                                          variant="bare" onclick="{!c.showAllResults}"/>
+                    <ui:inputText aura:id="search-input" class="slds-input" 
+                                  keyup="{!c.handleSearchKeyUp}" value="{!v.fieldSelectedVal}" 
+                                  updateOn="keyup" disabled="false" />
+                </div>
+            </div>
+        </div>
+        <div class="slds-p-horizontal_large slds-hide slds-scrollable_y slds-border_bottom slds-border_top slds-border_left slds-border_right" 
+             aura:id="dmslistdiv" id="dmsListTable" 
+             style="height: 6rem;">
+            <ul class="slds-has-dividers_bottom slds-has-block-links" id="dmsActsUL">
+                <aura:iteration items="{!v.retrievedRecords}" var="dms">
+                    <li class="slds-item slds-align_absolute-center">
+                        <div class="slds-truncate">
+                            <a href="javascript:void(0);" id="{!dms.Id}" 
+                               onclick="{!c.selectThisDMS}">{!dms.Id}</a>
+                        </div>
+                    </li>
+                </aura:iteration>
+            </ul>
+        </div>
+    </div>
+</aura:component>
