@@ -26,7 +26,7 @@
             <div>
                 <div class="slds-input-has-icon">
                     <lightning:buttonicon iconName="utility:search" class="slds-input__icon" size="small" alternativeText="" variant="bare" onclick="{!c.showAllResults}" />
-                    <ui:inputText aura:id="search-input" class="slds-input" keyup="{!c.handleSearchKeyUp}" value="{!v.fieldSelectedVal}" updateOn="keyup" disabled="false" />
+                    <ui:inputText aura:id="search-input" class="slds-input" keyup="{!c.handleSearchKeyUp}" updateOn="keyup" value="{!v.fieldSelectedVal}"  disabled="false" />
                 </div>
             </div>
         </div>

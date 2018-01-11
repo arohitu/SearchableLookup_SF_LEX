@@ -29,20 +29,24 @@
     startSearchDisplay: function(component, event, helper) {
         var currentVal, filter, ul, li, a;
         var itemCheck = false;
+        debugger;
         currentVal = component.get("v.fieldSelectedVal").toUpperCase();
+        filter=component.get("v.retrievedRecords");
+        console.log(currentVal);
         ul = document.getElementById("recsUL");
         li = ul.getElementsByTagName('li');
         var falseCount = 0;
         // Loop through all list items, and hide those who don't match the search query
         for (var i = 0; i < li.length; i++) {
-            a = li[i].getElementsByTagName("a")[0];
-            if (a.innerHTML.indexOf(currentVal) > -1) {
+            
+            a = li[i].getElementsByTagName('a')[0];
+            if (a.innerHTML.toUpperCase().indexOf(currentVal)>-1) {
                 li[i].style.display = "";
-                itemCheck = true;
+                itemCheck = true;   
             } 
             else {
                 falseCount++;
-                li[i].style.display = "none";
+                li[i].style.display = "none";                 
             }
         }
         console.log('To Hide Items>: '+falseCount);

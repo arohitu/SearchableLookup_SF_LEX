@@ -1,12 +1,14 @@
 ({
     doInit: function(component, event, helper) {
-        helper.retrieveRecords(component, event, helper);
+       helper.retrieveRecords(component, event, helper);
+       
     },
     showAllResults: function(component, event, helper) {
         var cmpTarget = component.find('recslistdiv');
         $A.util.toggleClass(cmpTarget, 'slds-hide');
     },
     handleSearchKeyUp: function(component, event, helper) {
+
         helper.startSearchDisplay(component, event, helper);
     },
     selectThisRecord: function(component, event, helper) {
