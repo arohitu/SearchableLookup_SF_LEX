@@ -6,10 +6,6 @@ public class Generic_Searchable_LookupField_Ctlr {
                                                  String qObject,
                                                  String qWhereCond,
                                                  String lookupField) {
-        System.debug('---caleed calasss--- 111 >: '+qfields);
-        System.debug('---caleed calasss--- 222 >: '+qObject);
-        System.debug('---caleed calasss--- 333 >: '+qWhereCond);
-        System.debug('---caleed calasss--- 444 >: '+lookupField);
         List<sObject> sobjectRecords = new List<sObject>();
         String soqlQuery = 'SELECT ';
         if (String.isNotBlank(qfields))  {

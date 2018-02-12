@@ -16,6 +16,7 @@
         component.set("v.fieldSelectedVal", clickedActivity);
         var cmpTarget = component.find('recslistdiv');
         $A.util.addClass(cmpTarget, 'slds-hide');
+        console.log('Selected Record Id: '+component.get("v.fieldSelectedVal"));
     },
     checkForNull: function(component, event, helper) {
         var selValue = component.get("v.fieldSelectedVal");
