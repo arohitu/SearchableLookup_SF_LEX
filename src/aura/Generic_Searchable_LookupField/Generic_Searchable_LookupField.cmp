@@ -1,14 +1,15 @@
 <aura:component implements="force:appHostable" controller="Generic_Searchable_LookupField_Ctlr">
     <!-- Attributes -->
-    <aura:attribute name="fieldlabel" type="String" default="Id" description="Label Name for the field" required="true" />
-    <aura:attribute name="lookupfieldAPI" type="String" default="Id" description="API Name for the field to be displayed for lookup" required="true" />
+    <aura:attribute name="fieldlabel" type="String" default="Id" description="Display Label Name for the field" required="true" />
+    <aura:attribute name="lookupfieldAPI" type="String" default="Id" description="API Name for the field to be displayed for used to do the lookup" required="true" />
     <aura:attribute name="fieldObject" type="String" default="Account" description="Object on which the field is present" required="true" />
-    <aura:attribute name="isRequired" type="Boolean" default="false" description="Is field required to fill" />
+    <aura:attribute name="isRequired" type="Boolean" default="false" description="Is field required to be filled" />
     <aura:attribute name="queryFields" type="String" description="comma separated query fields. should use API names." />
     <aura:attribute name="wherecondition" type="String" description="Where filter condition to be used on soql" />
+    <aura:attribute name="backEndFieldAPI" type="String" description="To specifiy API name of the field from which the backend value of  the selected value is used" default="Id"/>
     <!-- Attibutes that are set by the controller code -->
-    <aura:attribute name="retrievedRecords" type="String[]" description="To store the returned records" />
-    <aura:attribute name="fieldSelectedVal" type="String" description="to store the selected value from the list" />
+    <aura:attribute name="retrievedRecords" type="Object[]" description="To store the returned records" />
+    <aura:attribute name="fieldSelectedVal" type="String" description="To store the display value of  the selected value from the list" />
     <!-- Attributes -->
     <!-- Aura Handlers -->
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
@@ -35,8 +36,8 @@
                 <aura:iteration items="{!v.retrievedRecords}" var="rec">
                     <li class="slds-item slds-align_absolute-center">
                         <div class="slds-truncate">
-                            <a href="javascript:void(0);" id="{!rec}" onclick="{!c.selectThisRecord}">
-                                {!rec}
+                            <a href="javascript:void(0);" id="{!rec.sfId}" onclick="{!c.selectThisRecord}" name="{!rec.displayName}">
+                                {!rec.displayName}
                             </a>
                         </div>
                     </li>

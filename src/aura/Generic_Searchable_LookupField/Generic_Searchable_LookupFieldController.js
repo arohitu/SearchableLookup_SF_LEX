@@ -12,18 +12,19 @@
         helper.startSearchDisplay(component, event, helper);
     },
     selectThisRecord: function(component, event, helper) {
-        var clickedActivity = event.target.id;
-        component.set("v.fieldSelectedVal", clickedActivity);
+        var selectedValueBackEndId = event.target.id;
+        var selectedValueDisplayText = event.target.name;
+        component.set("v.fieldSelectedVal", selectedValueDisplayText);
         var cmpTarget = component.find('recslistdiv');
         $A.util.addClass(cmpTarget, 'slds-hide');
-        console.log('Selected Record Id: '+component.get("v.fieldSelectedVal"));
+        console.log("Display text: " + selectedValueDisplayText);
+        console.log('Backend Value>: '+selectedValueBackEndId);
     },
     checkForNull: function(component, event, helper) {
         var selValue = component.get("v.fieldSelectedVal");
         var errfield = component.find("search-input-error");
         if (selValue === '') {
-            errfield.set("v.errors", [{ message: "Selezionare un'attività DMS." }]);
-            //Do not confirm on parent component if DMS Activity is null
+            errfield.set("v.errors", [{ message: "Please select a value" }]);
             return false;
         } 
         else {

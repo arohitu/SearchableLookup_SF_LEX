@@ -2,6 +2,8 @@
     <c:Generic_Searchable_LookupField fieldlabel="Account Name"
                                       fieldObject="Account"
                                       isRequired="true"
-                                      lookupfieldAPI="Name"
-                                      queryFields="Id,Name,Type"/>
+                                      lookupfieldAPI="Phone"
+                                      backEndFieldAPI="Name"
+                                      queryFields="Id,Name,Type"
+                                      wherecondition="Phone != ''"/>
 </aura:application>
