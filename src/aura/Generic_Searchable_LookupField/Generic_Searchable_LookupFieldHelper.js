@@ -19,6 +19,7 @@
                     showList.displayName = retrievedRecs[i][component.get("v.lookupfieldAPI")];
                     finalLookupList.push(showList);
                 }
+                console.log('Record 1>: '+JSON.stringify(finalLookupList[0]));
                 component.set("v.retrievedRecords", finalLookupList);
             } 
             else if (response.getState() === "ERROR") {

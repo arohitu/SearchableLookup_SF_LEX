@@ -13,7 +13,7 @@ public class Generic_Searchable_LookupField_Ctlr {
                 soqlQuery = soqlQuery + qfields;
             } 
             else {
-                soqlQuery = soqlQuery + qfields + ' ' + lookupField;
+                soqlQuery = soqlQuery + qfields + ',' + lookupField;
             }
         } 
         else {
@@ -21,14 +21,14 @@ public class Generic_Searchable_LookupField_Ctlr {
         }
         soqlQuery = soqlQuery+' FROM '+qObject;
         if (String.isNotBlank(qWhereCond))  {
-            if(qWhereCond.containsIgnoreCase('WHERE')){
+            if('WHERE'.containsIgnoreCase(qWhereCond)){
                 soqlQuery = soqlQuery+' '+qWhereCond;
             }
             else {
                 soqlQuery = soqlQuery+' WHERE '+qWhereCond;
             }
         }
-        System.debug('soqlQuery>: '+soqlQuery);
+        System.debug('Final SOQL>: '+soqlQuery);
         sobjectRecords = Database.query(soqlQuery);
         return sobjectRecords;
     }
