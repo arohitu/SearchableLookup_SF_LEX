@@ -6,43 +6,57 @@
     <aura:attribute name="isRequired" type="Boolean" default="false" description="Is field required to be filled" />
     <aura:attribute name="queryFields" type="String" description="comma separated query fields. should use API names." />
     <aura:attribute name="wherecondition" type="String" description="Where filter condition to be used on soql" />
-    <aura:attribute name="backEndFieldAPI" type="String" description="To specifiy API name of the field from which the backend value of  the selected value is used" default="Id"/>
+    <aura:attribute name="backEndFieldAPI" type="String" description="To specifiy API name of the field from which the backend value of  the selected value is used" default="Id" />
     <!-- Attibutes that are set by the controller code -->
     <aura:attribute name="retrievedRecords" type="Object[]" description="To store the returned records" />
     <aura:attribute name="fieldSelectedVal" type="String" description="To store the display value of  the selected value from the list" />
+    <aura:attribute name="showError" type="Boolean" description="To show the alert incase of an apex error" />
     <!-- Attributes -->
     <!-- Aura Handlers -->
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
     <!-- Aura Handlers -->
-    <div class="slds-input-has-icon--right slds-p-right_x-small">
-        <div class="slds-form-element">
-            <label class="slds-form-element__label" for="text-input-01">
-                <aura:if isTrue="{!v.isRequired}">
-                    <abbr aura:id="requiredField" class="'slds-required" title="required">*</abbr>
-                </aura:if>
-                {!v.fieldlabel}
-            </label>
+    <aura:if isTrue="{!v.showError}">
+        <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert">
+            <span class="slds-assistive-text">Error</span>
+            <span class="slds-icon_container slds-icon-utility-ban slds-m-right_x-small" title="Description of icon when needed">
+            <lightning:buttonicon iconName="utility:ban" class="slds-input__icon" size="small" alternativeText="" variant="bare"/>
+          </span>
+            <aura:iteration items="{!v.retrievedRecords}" var="rec">
+                <h2>{!rec.displayName}</h2>
+            </aura:iteration>
         </div>
-        <div class="slds-form-element__control" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-            <div>
-                <div class="slds-input-has-icon">
-                    <lightning:buttonicon iconName="utility:search" class="slds-input__icon" size="small" alternativeText="" variant="bare" onclick="{!c.showAllResults}" />
-                    <ui:inputText aura:id="search-input" class="slds-input" keyup="{!c.handleSearchKeyUp}" updateOn="keyup" value="{!v.fieldSelectedVal}"  disabled="false" />
+        <aura:set attribute="else">
+            <div class="slds-input-has-icon--right slds-p-right_x-small">
+                <div class="slds-form-element">
+                    <label class="slds-form-element__label" for="text-input-01">
+                        <aura:if isTrue="{!v.isRequired}">
+                            <abbr aura:id="requiredField" class="'slds-required" title="required">*</abbr>
+                        </aura:if>
+                        {!v.fieldlabel}
+                    </label>
                 </div>
-            </div>
-        </div>
-        <div class="slds-p-horizontal_large slds-hide slds-scrollable_y slds-border_bottom slds-border_top slds-border_left slds-border_right" aura:id="recslistdiv" id="recsListTable" style="height: 6rem;">
-            <ul class="slds-has-dividers_bottom slds-has-block-links" id="recsUL">
-                <aura:iteration items="{!v.retrievedRecords}" var="rec">
-                    <li class="slds-item slds-align_absolute-center">
-                        <div class="slds-truncate">
-                            <a href="javascript:void(0);" id="{!rec.sfId}" onclick="{!c.selectThisRecord}" name="{!rec.displayName}">
+                <div class="slds-form-element__control" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <div>
+                        <div class="slds-input-has-icon">
+                            <lightning:buttonicon iconName="utility:search" class="slds-input__icon" size="small" alternativeText="" variant="bare" onclick="{!c.showAllResults}" />
+                            <ui:inputText aura:id="search-input" class="slds-input" keyup="{!c.handleSearchKeyUp}" updateOn="keyup" value="{!v.fieldSelectedVal}" disabled="false" />
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-p-horizontal_large slds-hide slds-scrollable_y slds-border_bottom slds-border_top slds-border_left slds-border_right" aura:id="recslistdiv" id="recsListTable" style="height: 6rem;">
+                    <ul class="slds-has-dividers_bottom slds-has-block-links" id="recsUL">
+                        <aura:iteration items="{!v.retrievedRecords}" var="rec">
+                            <li class="slds-item slds-align_absolute-center">
+                                <div class="slds-truncate">
+                                    <a href="javascript:void(0);" id="{!rec.sfId}" onclick="{!c.selectThisRecord}" name="{!rec.displayName}">
                                 {!rec.displayName}
                             </a>
-                        </div>
-                    </li>
-                </aura:iteration>
-            </ul>
-        </div>
-    </div>
+                                </div>
+                            </li>
+                        </aura:iteration>
+                    </ul>
+                </div>
+            </div>
+        </aura:set>
+    </aura:if>
 </aura:component>

@@ -14,12 +14,19 @@
                 var retrievedRecs = response.getReturnValue();
                 var finalLookupList = [];
                 for (var i = 0; i < retrievedRecs.length; i++) {
-                    showList = new Object();
-                    showList.sfId = retrievedRecs[i][component.get("v.backEndFieldAPI")];
-                    showList.displayName = retrievedRecs[i][component.get("v.lookupfieldAPI")];
-                    finalLookupList.push(showList);
+                    if(retrievedRecs[i].hasError){
+                        showList = new Object();
+                        component.set("v.showError",true)
+                        showList.displayName = retrievedRecs[i].myExceptionMessage;
+                        finalLookupList.push(showList);
+                    }
+                    else {
+                        showList = new Object();
+                        showList.sfId = retrievedRecs[i].mysObj[component.get("v.backEndFieldAPI")];
+                        showList.displayName = retrievedRecs[i].mysObj[component.get("v.lookupfieldAPI")];
+                        finalLookupList.push(showList);
+                    }
                 }
-                console.log('Record 1>: '+JSON.stringify(finalLookupList[0]));
                 component.set("v.retrievedRecords", finalLookupList);
             } 
             else if (response.getState() === "ERROR") {
