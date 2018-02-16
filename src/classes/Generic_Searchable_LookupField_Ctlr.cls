@@ -3,9 +3,10 @@ public class Generic_Searchable_LookupField_Ctlr {
     // Method that provides the Activity record created during the process for the use within the component. Query:1,DML:0
     @AuraEnabled
     public static List<RecordsWrap> retrieveRecords (String qfields,
-                                                 String qObject,
-                                                 String qWhereCond,
-                                                 String lookupField) {
+                                                     String qObject,
+                                                     String qWhereCond,
+                                                     String lookupField,
+                                                     String backEndField) {
         List<RecordsWrap> recordsWrapList = new List<RecordsWrap>();
         try{
             List<sObject> sobjectRecords = new List<sObject>();
@@ -20,6 +21,9 @@ public class Generic_Searchable_LookupField_Ctlr {
             } 
             else {
                 soqlQuery = soqlQuery+lookupField;
+            }
+            if(!soqlQuery.containsIgnoreCase(backEndField)){
+                soqlQuery = soqlQuery+','+backEndField;
             }
             soqlQuery = soqlQuery+' FROM '+qObject;
             if (String.isNotBlank(qWhereCond))  {

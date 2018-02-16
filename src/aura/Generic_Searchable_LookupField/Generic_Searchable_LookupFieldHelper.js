@@ -6,7 +6,8 @@
             qfields: component.get("v.queryFields"),
             qObject: component.get("v.fieldObject"),
             qWhereCond: component.get("v.wherecondition"),
-            lookupField: component.get("v.lookupfieldAPI")
+            lookupField: component.get("v.lookupfieldAPI"),
+            backEndField: component.get("v.backEndFieldAPI")
 
         });
         action.setCallback(this, function(response) {
@@ -15,13 +16,13 @@
                 var finalLookupList = [];
                 for (var i = 0; i < retrievedRecs.length; i++) {
                     if(retrievedRecs[i].hasError){
-                        showList = new Object();
+                        showList = {};
                         component.set("v.showError",true)
                         showList.displayName = retrievedRecs[i].myExceptionMessage;
                         finalLookupList.push(showList);
                     }
                     else {
-                        showList = new Object();
+                        showList = {};
                         showList.sfId = retrievedRecs[i].mysObj[component.get("v.backEndFieldAPI")];
                         showList.displayName = retrievedRecs[i].mysObj[component.get("v.lookupfieldAPI")];
                         finalLookupList.push(showList);
@@ -57,6 +58,9 @@
         }
         if (itemCheck === true && currentVal !== '') {
             $A.util.removeClass(component.find('recslistdiv'), 'slds-hide');
+        }
+        else if (currentVal === '' || itemCheck === false){
+            $A.util.addClass(component.find('recslistdiv'), 'slds-hide');
         }
     }
 })

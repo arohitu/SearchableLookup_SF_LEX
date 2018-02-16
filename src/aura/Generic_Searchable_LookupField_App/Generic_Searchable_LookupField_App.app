@@ -1,9 +1,9 @@
 <aura:application extends="force:slds" >
-    <c:Generic_Searchable_LookupField fieldlabel="Case Number"
-                                      fieldObject="Case"
+    <c:Generic_Searchable_LookupField fieldlabel="Account Name"
+                                      fieldObject="Account"
                                       isRequired="true"
-                                      lookupfieldAPI="CaseNumber"
-                                      backEndFieldAPI="Id"
+                                      lookupfieldAPI="Type"
+                                      backEndFieldAPI="Name"
                                       queryFields="Id"
                                       />
 </aura:application>
